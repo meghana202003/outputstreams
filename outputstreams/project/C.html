@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30 Days to Go ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Georgia, serif;
+    background: linear-gradient(135deg, #ffd6e7, #e6d6ff);
+    color: #a83265;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 430px;
+    padding: 25px;
+}
+
+h1 {
+    font-size: 27px;
+}
+
+.card {
+    display: none;
+    background: rgba(255,255,255,0.85);
+    padding: 28px 20px;
+    border-radius: 22px;
+    box-shadow: 0 8px 25px #b76b9633;
+    animation: openCard 1s ease both;
+}
+
+.card.active {
+    display: block;
+}
+
+.emoji {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.message {
+    font-size: 19px;
+    line-height: 1.7;
+}
+
+button {
+    margin-top: 25px;
+    padding: 13px 25px;
+    border: none;
+    border-radius: 30px;
+    background: #e75480;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #c73868;
+}
+
+@keyframes openCard {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.heart {
+    position: fixed;
+    bottom: -30px;
+    animation: floatUp 6s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+    <h1>💌 A Little Surprise For You 💌</h1>
+
+    <div class="card active">
+        <div class="emoji">🎁</div>
+        <div class="message">
+            Hey, someone special... 🥹❤️<br>
+            I have a little surprise for you!
+        </div>
+        <button onclick="nextCard()">Open your surprise 💗</button>
+    </div>
+
+    <div class="card">
+        <div class="emoji">🗓️</div>
+        <div class="message">
+            Guess what? 👀<br>
+            Today is October 24! ✨
+        </div>
+        <button onclick="nextCard()">Next 💌</button>
+    </div>
+
+    <div class="card">
+        <div class="emoji">🎂</div>
+        <div class="message">
+            Only ONE MONTH TO GO! 🥳❤️<br>
+            Your special day is coming!
+        </div>
+        <button onclick="nextCard()">One more thing... 🫶</button>
+    </div>
+
+    <div class="card">
+        <div class="emoji">❤️🧿</div>
+        <div class="message">
+            November 24 is special to me,<br>
+            because it's the day someone<br>
+            important to my life was born. 🥹
+        </div>
+        <button onclick="nextCard()">Read my final message 💖</button>
+    </div>
+
+    <div class="card">
+        <div class="emoji">💗🎉</div>
+        <div class="message">
+            The countdown begins! ⏳<br><br>
+            30 DAYS TO GO! 🎂<br>
+            Until your special day.<br><br>
+            Stay happy and keep smiling! 🫶❤️
+        </div>
+        <button onclick="restart()">Read it again 🔁</button>
+    </div>
+</div>
+
+<script>
+const cards = document.querySelectorAll(".card");
+let current = 0;
+
+function nextCard() {
+    cards[current].classList.remove("active");
+    current = (current + 1) % cards.length;
+    cards[current].classList.add("active");
+}
+
+function restart() {
+    cards[current].classList.remove("active");
+    current = 0;
+    cards[current].classList.add("active");
+}
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.textContent = ["❤️", "💗", "💕", "✨"][
+        Math.floor(Math.random() * 4)
+    ];
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (16 + Math.random() * 20) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 500);
+</script>
+</body>
+</html>
